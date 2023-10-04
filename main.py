@@ -1,7 +1,9 @@
 from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: int, q: Union[str, None] = None):
@@ -10,15 +12,9 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 from fastapi.responses import HTMLResponse
 
 @app.get("/", response_class=HTMLResponse)
-def homepage():
-    return """
-    <html>
-    <head>
-        <title>CodeCraft Collective</title>
-    </head>
-    <body>
-        <h1>Welcome!</h1>
-        <p>Use this website to make learning fun!</p>
-    </body>
-    </html>
-    """
+async def homepage(request:Request):
+    return templates.TemplateResponse("welcome.html", {"request": request})
+
+@app.get("/login", response_class=HTMLResponse)
+async def homepage(request:Request):
+    return templates.TemplateResponse("login.html", {"request": request})
