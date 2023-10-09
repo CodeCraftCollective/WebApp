@@ -1,4 +1,4 @@
-pip install fastapi
-pip install "uvicorn[standard]"
+pip install flask  
+pip install flask-login
 
-pip install 'strawberry-graphql[fastapi]'
+pip install flask-sqlalchemy
