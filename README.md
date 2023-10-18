@@ -1,4 +1,4 @@
 # WebApp
-Before anything, make sure to run "pip install django"
-To run the website, go inside the "website"directory, 
-and run "python manage.py runserver" in cmd
+Make sure to run "pip install django" 
+To run website, go inside the directory "website" 
+and run "python manage.py runserver"
