@@ -20,6 +20,6 @@ from registration import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("registration/",v.registration, name="registration"),
     path('', include("main.urls")),
+    path('', include("registration.urls"))
 ]
