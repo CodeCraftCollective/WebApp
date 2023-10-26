@@ -8,7 +8,7 @@ def registration(response):
         form = UserCreationForm(response.POST)
         if form.is_valid():
             form.save()
-            return redirect("/home")
+            return redirect("/")
     else:
         form = UserCreationForm()
     return render(response, "registration/registration.html", {"form":form})
