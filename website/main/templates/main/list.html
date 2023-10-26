@@ -19,13 +19,17 @@
                 </div>
             </div>
             <input type="text", value="{{item.text}}" class="form-control">
+            <input type="text", value="{{item.definition}}" class="form-control">
         </div>
         {% endfor %}
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <button type = "submit", name = "save", value = "save", class="btn-success">Save</button>
             </div>
+            <label for="exampleWord" class="form-label">Word</label>
             <input type = "text", name = "new">
+            <label for="exampleDefinition" class="form-label">Definition</label>
+            <input type = "text", name = "definition">
         </div>
         <button type = "submit", name = "newItem", value = "newItem", class="btn-success">Add Item</button>
     </form>
