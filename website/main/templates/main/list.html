@@ -1,7 +1,5 @@
 <!--Example only-->
-
 {% extends "main/base.html" %}
-{% block title %}View List{% endblock %}
 
 {% block content %}
     <h1>{{ls.name}}</h1>
@@ -9,28 +7,18 @@
         {% csrf_token %}
         {% for item in ls.item_set.all %}
         <div class="input-group mb-3">  
-            <div class="input-group-prepend">
-                <div class="inpur-group-text">
-                    {% if item.complete == True %}
-                        <input type = "checkbox", value = "clicked", name = "c{{item.id}}" checked>
-                    {% else %}
-                        <input type = "checkbox", value = "clicked", name = "c{{item.id}}">
-                    {% endif %}
-                </div>
-            </div>
             <input type="text", value="{{item.text}}" class="form-control">
             <input type="text", value="{{item.definition}}" class="form-control">
+            <button type="submit" name="deleteItem" value="{{ item.id }}">Delete</button>
         </div>
         {% endfor %}
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button type = "submit", name = "save", value = "save", class="btn-success">Save</button>
-            </div>
-            <label for="exampleWord" class="form-label">Word</label>
+            <label for="exampleWord" class="form-label">Word:</label>   <!--Fix spacing between "word" and "define"-->
             <input type = "text", name = "new">
-            <label for="exampleDefinition" class="form-label">Definition</label>
-            <input type = "text", name = "definition">
         </div>
+        <div>
+            <label for="exampleDefinition" class="form-label"> Define: </label>
+            <input type = "text", name = "definition"></div>
         <button type = "submit", name = "newItem", value = "newItem", class="btn-success">Add Item</button>
     </form>
 {% endblock %}

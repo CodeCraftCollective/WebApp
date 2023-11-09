@@ -1,0 +1,129 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<style>* 
+  body {
+        height: 100vh;
+        background: linear-gradient(45deg, #5D8AA8, #003366);
+        color: rgb(211, 211, 211);
+        justify-content: center;
+        align-items: center;
+  }
+  
+  .container {
+        width: 500px;
+        height: 350px;
+        perspective: 800px;
+        position: relative;
+  }
+  
+  .card {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        transition: transform 1500ms;
+        transform-style: preserve-3d;
+  }
+  
+  .front,
+  .back {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        background-color: rgb(58, 58, 58);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  }
+  
+  .back {
+        transform: rotateY(180deg);
+  }
+  .card.is-flipped {
+        transform: rotateY(180deg);
+    }
+
+    .buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    button {
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="buttons">
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+</div>
+
+<div id="flashcard-container" class="container">
+  <!-- Flashcard will be inserted here by JavaScript -->
+</div>
+
+<script>
+    // Serialized flashcards data from Django context variable
+    const flashcardsData = {{ flashcards|safe }};
+    let currentCardIndex = 0;
+
+    function createCardElement(cardData) {
+        const container = document.createElement('div');
+        container.className = 'card';
+
+        const front = document.createElement('div');
+        front.className = 'front';
+        front.textContent = cardData.front;
+
+        const back = document.createElement('div');
+        back.className = 'back';
+        back.textContent = cardData.back;
+
+        container.appendChild(front);
+        container.appendChild(back);
+        
+         // Event listener to toggle flip
+         container.addEventListener('click', function() {
+            container.classList.toggle('is-flipped');
+        });
+
+        return container;
+    }
+
+    function updateCard() {
+        const flashcardContainer = document.getElementById('flashcard-container');
+        // Clear the current content
+        flashcardContainer.innerHTML = '';
+        // Create new card element
+        const cardElement = createCardElement(flashcardsData[currentCardIndex]);
+        // Append new card to the container
+        flashcardContainer.appendChild(cardElement);
+        // Make sure the 'Previous' button is disabled on the first card
+        document.getElementById('prev').disabled = currentCardIndex === 0;
+        // Make sure the 'Next' button is disabled on the last card
+        document.getElementById('next').disabled = currentCardIndex === flashcardsData.length - 1;
+    }
+
+    document.getElementById('next').addEventListener('click', function() {
+        if (currentCardIndex < flashcardsData.length - 1) {
+            currentCardIndex++;
+            updateCard();
+        }
+    });
+
+    document.getElementById('prev').addEventListener('click', function() {
+        if (currentCardIndex > 0) {
+            currentCardIndex--;
+            updateCard();
+        }
+    });
+
+    // Initialize the first card
+    updateCard();
+</script>
+
+{% endblock %}
