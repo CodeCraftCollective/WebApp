@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<style>* 
+  body {
+        height: 100vh;
+        background: linear-gradient(45deg, #5D8AA8, #003366);
+        color: rgb(211, 211, 211);
+        justify-content: center;
+        align-items: center;
+  }
+</style>
+
+{% csrf_token %}
+{% for list in ls %}
+<div>
+    <a href="/view/{{list.id}}">{{list.name}}</a>
+    <form action = "/{{list.id}}">
+        <button type = "submit">Edit</button>
+    </form>
+    <a>-</a>
+</div>
+{% endfor %}
+
+{% endblock %}
