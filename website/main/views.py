@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import ToDoList, Item
+from .models import ToDoList
 from .forms import CreateNewList
 # Create your views here.
 
@@ -46,7 +46,13 @@ def home(response):
 
 def view(response, id):
     ls = ToDoList.objects.get(id = id)
-    items = ls.item_set.all()
-    flashcards = [{'front': item.text, 'back': item.definition} for item in items]
+    if ls in response.user.todolist.all():
+        items = ls.item_set.all()
+        flashcards = [{'front': item.text, 'back': item.definition} for item in items]
 
-    return render(response, 'main/view.html', {'flashcards': flashcards})
+        return render(response, 'main/view.html', {'flashcards': flashcards})
+    return render(response, "main/view.html", {})
+
+def menu(response):
+    ls = ToDoList.objects.filter(user=response.user)
+    return render(response, "main/menu.html", {"ls":ls})
