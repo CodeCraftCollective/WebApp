@@ -16,6 +16,8 @@
         height: 350px;
         perspective: 800px;
         position: relative;
+        padding: 50px 10px;
+
   }
   
   .card {
@@ -59,6 +61,7 @@
 
 <div class="buttons">
     <button id="prev">Previous</button>
+    <button id ="shuffle">Shuffle</button>
     <button id="next">Next</button>
 </div>
 
@@ -107,6 +110,19 @@
         // Make sure the 'Next' button is disabled on the last card
         document.getElementById('next').disabled = currentCardIndex === flashcardsData.length - 1;
     }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    document.getElementById('shuffle').addEventListener('click', function() {
+        shuffleArray(flashcardsData); // Shuffle the flashcards
+        currentCardIndex = 0; // Reset the index to start from the first flashcard in the shuffled array
+        updateCard(); // Update the card display
+    });
 
     document.getElementById('next').addEventListener('click', function() {
         if (currentCardIndex < flashcardsData.length - 1) {
