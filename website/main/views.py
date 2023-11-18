@@ -15,7 +15,7 @@ def index(response, id):
             defi = response.POST.get("definition")
 
             if (len(txt) > 0 and len(defi) > 0):
-                ls.item_set.create(text=txt, d=defi, complete=False)
+                ls.item_set.create(text=txt, definition=defi, complete=False)
             else:
                 print("invalid")
         elif response.POST.get("deleteItem"):
@@ -52,8 +52,9 @@ def view(response, id):
     ls = ToDoList.objects.get(id=id)
     if ls in response.user.todolist.all():
         items = ls.item_set.all()
-        flashcards = [{'front': item.text, 'back': item.d} for item in items]
-
+        flashcards = [
+            {'front': item.text, 'back': item.definition} for item in items
+            ]
         return render(response, 'main/view.html', {'flashcards': flashcards})
     return render(response, "main/view.html", {})
 
