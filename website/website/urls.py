@@ -20,7 +20,7 @@ from registration import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("registration/", v.registration, name= "register"),
+    path("registration/", v.registration, name="register"),
     path('', include("django.contrib.auth.urls")),
     path('', include("main.urls")),
 ]
