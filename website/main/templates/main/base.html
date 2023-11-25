@@ -1,29 +1,42 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CodeCraftCollective{% endblock %}</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        body{
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
+            background-color: #f4f4f4;
         }
 
         /* Styling for the navigation menu and footer bar */
-        #navMenu{
+        #navMenu {
             background: linear-gradient(45deg, #5D8AA8, #003366);
             box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
             display: flex;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 10px 0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
         }
 
-        #navMenu a {
+        #navMenu .navbar-brand {
+            color: white;
+            font-weight: bold;
+            font-size: 1.8em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #navMenu .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        #navMenu .nav-links a {
             color: white;
             text-align: center;
             padding: 10px 20px;
@@ -33,41 +46,68 @@
             transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.3s;
         }
 
-        #navMenu a:hover {
+        #navMenu .nav-links a:hover {
             background-color: #003366;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        #navMenu b {
-            color: white;
-            padding: 10 20px;
-            margin: 2px 10px;
+        .main-content {
+            padding: 50px 0;
+        }
+
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .content-section h2 {
+            color: #003366;
+            margin-bottom: 30px;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .ml-auto {
+            margin-left: auto;
         }
     </style>
 </head>
-
 <body>
     <div id="navMenu">
-        <b class="navbar-brand" >CodeCraftCollective</b>
-        <a href="/">Home</a>
-        {% if user.is_authenticated %}
-        <a href="/menu">Cards</a>
-        <a href="/create">Create</a>
-        <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/login">Login</a>
-        <a href="/registration">Sign Up</a>
-        {% endif %}
-        <a href="https://github.com/CodeCraftCollective/WebApp">About</a>
+        <b class="navbar-brand">CodeCraftCollective</b>
+        <div class="nav-links ml-auto">
+            <a href="/">Home</a>
+            <a href="https://github.com/CodeCraftCollective/WebApp">About</a>
+            {% if user.is_authenticated %}
+                <a href="/menu">Cards</a>
+                <a href="/create">Create</a>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/registration">Sign Up</a>
+            {% endif %}
+        </div>
     </div>
 
-    <div id = "content", name = "content", class = "main">
-        <div class ="row justify-content-center">
-            <div class = "col-8">
-                <hr class = "mt-0 mb-4">
-                {% block content %}
-                {% endblock %}
+    <div class="main-content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="content-section">
+                        <h2>Welcome to CodeCraftCollective</h2>
+                        <p>
+                        </p>
+                        <!-- Your content goes here -->
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
