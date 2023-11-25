@@ -3,20 +3,30 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Username</label>
-              <input type="text" class="form-control" name="username" >
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="Enter your username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter your password">
+                        </div>
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                        <p class="text-center mt-3"><a href="/password_reset/">Forgot Password?</a></p>
+                    </form>
+                </div>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" name="password">
-            </div>
-            {% for message in messages %}
-                <p id = "messages">{{message}}</p>
-            {% endfor %}
-        <button type="submit", class="btn btn-success">Login</button>
-        <a href = "/password_reset/"> Forgot Password?</a>
-    </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
