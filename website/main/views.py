@@ -63,6 +63,7 @@ def menu(response):
     ls = ToDoList.objects.filter(user=response.user)
     return render(response, "main/menu.html", {"ls": ls})
 
+
 def lists(response):
     ls = ToDoList.objects.filter(user=response.user)
     return render(response, "main/lists.html", {"ls": ls})
