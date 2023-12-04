@@ -1,90 +1,76 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<style>
-    body {
+
+<style>* 
+  body {
         height: 100vh;
         background: linear-gradient(45deg, #5D8AA8, #003366);
-        color: #d3d3d3;
-        display: flex;
+        color: rgb(211, 211, 211);
         justify-content: center;
         align-items: center;
-        font-family: Arial, sans-serif;
-        margin: 0;
-    }
-
-    .container {
+  }
+  
+  .container {
         width: 500px;
         height: 350px;
         perspective: 800px;
         position: relative;
         padding: 50px 10px;
-    }
 
-    .card {
+  }
+  
+  .card {
         height: 100%;
         width: 100%;
         position: absolute;
         transition: transform 1500ms;
         transform-style: preserve-3d;
-    }
-
-    .front,
-    .back {
+  }
+  
+  .front,
+  .back {
         height: 100%;
         width: 100%;
         position: absolute;
         backface-visibility: hidden;
-        background-color: #3a3a3a;
+        background-color: rgb(58, 58, 58);
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 8px;
-    }
-
-    .back {
+  }
+  
+  .back {
         transform: rotateY(180deg);
-    }
-
-    .card.is-flipped {
+  }
+  .card.is-flipped {
         transform: rotateY(180deg);
     }
 
     .buttons {
         margin-top: 20px;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-around;
     }
 
     button {
         padding: 10px 20px;
         cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        margin: 0 10px;
-        background-color: #5D8AA8;
-        color: #fff;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #003366;
     }
 </style>
 
 <div class="buttons">
-    <button id="prev" disabled>Previous</button>
-    <button id="shuffle">Shuffle</button>
+    <button id="prev">Previous</button>
+    <button id ="shuffle">Shuffle</button>
     <button id="next">Next</button>
 </div>
 
 <div id="flashcard-container" class="container">
-    <!-- Flashcard will be inserted here by JavaScript -->
+  <!-- Flashcard will be inserted here by JavaScript -->
 </div>
 
 <script>
+    // Serialized flashcards data from Django context variable
     const flashcardsData = {{ flashcards|safe }};
     let currentCardIndex = 0;
 
@@ -102,8 +88,9 @@
 
         container.appendChild(front);
         container.appendChild(back);
-
-        container.addEventListener('click', function () {
+        
+         // Event listener to toggle flip
+         container.addEventListener('click', function() {
             container.classList.toggle('is-flipped');
         });
 
@@ -112,12 +99,15 @@
 
     function updateCard() {
         const flashcardContainer = document.getElementById('flashcard-container');
+        // Clear the current content
         flashcardContainer.innerHTML = '';
-
+        // Create new card element
         const cardElement = createCardElement(flashcardsData[currentCardIndex]);
+        // Append new card to the container
         flashcardContainer.appendChild(cardElement);
-
+        // Make sure the 'Previous' button is disabled on the first card
         document.getElementById('prev').disabled = currentCardIndex === 0;
+        // Make sure the 'Next' button is disabled on the last card
         document.getElementById('next').disabled = currentCardIndex === flashcardsData.length - 1;
     }
 
@@ -128,27 +118,28 @@
         }
     }
 
-    document.getElementById('shuffle').addEventListener('click', function () {
-        shuffleArray(flashcardsData);
-        currentCardIndex = 0;
-        updateCard();
+    document.getElementById('shuffle').addEventListener('click', function() {
+        shuffleArray(flashcardsData); // Shuffle the flashcards
+        currentCardIndex = 0; // Reset the index to start from the first flashcard in the shuffled array
+        updateCard(); // Update the card display
     });
 
-    document.getElementById('next').addEventListener('click', function () {
+    document.getElementById('next').addEventListener('click', function() {
         if (currentCardIndex < flashcardsData.length - 1) {
             currentCardIndex++;
             updateCard();
         }
     });
 
-    document.getElementById('prev').addEventListener('click', function () {
+    document.getElementById('prev').addEventListener('click', function() {
         if (currentCardIndex > 0) {
             currentCardIndex--;
             updateCard();
         }
     });
 
+    // Initialize the first card
     updateCard();
 </script>
-{% endblock %}
 
+{% endblock %}
