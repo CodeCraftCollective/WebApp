@@ -124,6 +124,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # Default primary key field type

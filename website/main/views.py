@@ -50,7 +50,7 @@ def home(response):
 
 def view(response, id):
     ls = ToDoList.objects.get(id=id)
-    if ls in response.user.todolist.all():
+    if ls in ToDoList.objects.all():
         items = ls.item_set.all()
         flashcards = [
             {'front': item.text, 'back': item.definition} for item in items
@@ -65,5 +65,5 @@ def menu(response):
 
 
 def lists(response):
-    ls = ToDoList.objects.filter(user=response.user)
+    ls = ToDoList.objects.filter(approved=True)
     return render(response, "main/lists.html", {"ls": ls})
