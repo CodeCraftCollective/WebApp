@@ -12,27 +12,22 @@
   }
   
   .container {
-        width: 500px;
-        height: 350px;
-        perspective: 800px;
-        position: relative;
-        padding: 50px 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-
-  }
+    width: 80%; /* Adjust the width of the container */
+    max-width: 500px; /* Set a maximum width */
+    height: auto; /* Allow the container to adjust its height based on content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Center the container horizontally */
+}
   
   .card {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        transition: transform 1500ms;
-        transform-style: preserve-3d;
-        background-color: white; /* Set white background */
-        border: 4px solid black; /* Add a thick black border */
-  }
+    width: 100%; /* Make the card width 100% */
+    max-width: 300px; /* Set a maximum width for the card */
+    height: 200px; /* Set the height of the card */
+    font-size: 24px; /* Increase the font size */
+}
+
   
   .front,
   .back {
