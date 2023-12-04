@@ -14,8 +14,14 @@
     }
 
     .container {
-        width: 80%;
-        max-width: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .card-container {
+        width: 500px;
         height: 350px;
         perspective: 800px;
         position: relative;
@@ -29,6 +35,7 @@
         transition: transform 1500ms;
         transform-style: preserve-3d;
         border: 4px solid #fff; /* Added a thick border */
+        border-radius: 10px;
     }
 
     .front,
@@ -78,16 +85,19 @@
 </style>
 
 <div class="container">
-    <div class="buttons">
-        <button id="prev" disabled>Previous</button>
-        <button id="shuffle">Shuffle</button>
-        <button id="next">Next</button>
-    </div>
+    <div class="card-container">
+        <div class="flashcard" id="flashcard-container">
+            <!-- Flashcard will be inserted here by JavaScript -->
+        </div>
 
-    <div class="flashcard" id="flashcard-container">
-        <!-- Flashcard will be inserted here by JavaScript -->
+        <div class="buttons">
+            <button id="prev" disabled>Previous</button>
+            <button id="shuffle">Shuffle</button>
+            <button id="next">Next</button>
+        </div>
     </div>
 </div>
+
 
 <script>
     // Serialized flashcards data from Django context variable
