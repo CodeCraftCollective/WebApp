@@ -1,49 +1,53 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-
-<style>* 
-  body {
+<style>
+    body {
         height: 100vh;
         background: linear-gradient(45deg, #5D8AA8, #003366);
         color: rgb(211, 211, 211);
         justify-content: center;
         align-items: center;
-  }
-  
-  .container {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
         width: 500px;
         height: 350px;
         perspective: 800px;
         position: relative;
         padding: 50px 10px;
+    }
 
-  }
-  
-  .card {
+    .card {
         height: 100%;
         width: 100%;
         position: absolute;
         transition: transform 1500ms;
         transform-style: preserve-3d;
-  }
-  
-  .front,
-  .back {
+    }
+
+    .front,
+    .back {
         height: 100%;
         width: 100%;
         position: absolute;
         backface-visibility: hidden;
-        background-color: rgb(58, 58, 58);
+        background-color: #fff; /* Changed to white */
         display: flex;
         justify-content: center;
         align-items: center;
-  }
-  
-  .back {
+        border-radius: 10px;
+        font-size: 24px; /* Increased text size */
+        color: #000; /* Changed text color to black */
+    }
+
+    .back {
         transform: rotateY(180deg);
-  }
-  .card.is-flipped {
+    }
+
+    .card.is-flipped {
         transform: rotateY(180deg);
     }
 
@@ -61,7 +65,7 @@
 
 <div class="buttons">
     <button id="prev">Previous</button>
-    <button id ="shuffle">Shuffle</button>
+    <button id="shuffle">Shuffle</button>
     <button id="next">Next</button>
 </div>
 
