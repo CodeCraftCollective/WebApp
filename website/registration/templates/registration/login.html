@@ -22,7 +22,7 @@
                             <p class="text-danger">{{message}}</p>
                         {% endfor %}
                         <button type="submit" class="btn btn-success btn-block">Login</button>
-                        <p class="text-center mt-3"><a href="/password_reset/">Forgot Password?</a></p>
+                        <p class="text-center mt-3"><a href="{% url 'password_reset_form' %}"><i>Forgot Password?</i></a>
                     </form>
                 </div>
             </div>
