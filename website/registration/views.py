@@ -5,22 +5,16 @@ from .forms import RegisterForm
 from django.urls import path
 from .views import MyLoginView, RegisterView
 
-from django.contrib.auth.views import (
-    LogoutView, 
-    PasswordResetView, 
-    PasswordResetDoneView, 
-    PasswordResetConfirmView,
-    PasswordResetCompleteView
-)
-urlpatterns = [
-    path('login/', MyLoginView.as_view(redirect_authenticated_user=True),name='login'),
-    path('logout/', LogoutView.as_view(next_page='login'),name='logout'),
-    path('register/', RegisterView.as_view(),name='register'),
-    path('password-reset/', PasswordResetView.as_view(template_name='users/password_reset.html'),name='password-reset'),
-    path('password-reset/done/', PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),name='password_reset_done'),
-    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),name='password_reset_confirm'),
-    path('password-reset-complete/',PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),name='password_reset_complete'),
-]
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    email_template_name = 'registration/password_reset_email.html'
+    subject_template_name = 'registration/password_reset_subject'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
 
 def registration(response):
     if response.method == "POST":
