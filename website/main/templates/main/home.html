@@ -30,7 +30,12 @@
             Create your own lists and cards to help you study for your next test!
         </p>
         <p>
-            Try it out now! <a href="/registration">Register</a>
+            Try it out now!
+            {% if user.is_authenticated %}
+                <a href="/create">Create</a>
+            {% else %}
+                <a href="/registration">Register</a>
+            {% endif %}
         </p>
     </section>
 
