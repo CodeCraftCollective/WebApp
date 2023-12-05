@@ -22,6 +22,33 @@
             line-height: 1.6;
         }
 
+        .contact-us h2 {
+            color: #003366;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd; /* Add this line for a seamless border */
+            padding-bottom: 10px; /* Optional: Add some space between the title and the border */
+        }
+
+        .contact-card {
+            background-color: #fff;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-card h3 {
+            color: #003366;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
     </style>
 
     <section id="welcome-section">
@@ -41,5 +68,25 @@
 
     <section class="contact-us">
         <h2>Contact Us</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <h3>Jasper Obiacoro</h3>
+                    <p>Email: jsobiacoro@cpp.edu</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <h3>Julian Cabrera</h3>
+                    <p>Email: jc@gmail.com</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <h3>Abdiel Mendez</h3>
+                    <p>Email: am@gmail.com</p>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}
