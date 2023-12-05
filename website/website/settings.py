@@ -127,10 +127,10 @@ STATIC_URL = 'static/'
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"
 # email configs
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+SENDGRID_API_KEY = os.getenv('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')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_USER = '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'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
