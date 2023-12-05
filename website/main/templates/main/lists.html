@@ -10,16 +10,29 @@
         justify-content: center;
         align-items: center;
   }
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card {
+    background: white;
+    width:200px;
+    height: 100px;
+    margin: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+
 </style>
 
+<section class="container">
 {% csrf_token %}
 {% for list in ls %}
 <div>
-    <a href="/view/{{list.id}}">{{list.name}}</a>
-</div>
-<div>
-  <a>-</a>
+    <a href="/view/{{list.id}}" target="_blank" class="card">{{list.name}}</a>
 </div>
 {% endfor %}
-
+</section>
 {% endblock %}
