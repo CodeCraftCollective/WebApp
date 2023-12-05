@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .forms import RegisterForm
 from django.urls import path
-from .views import MyLoginView, RegisterView
+#from .views import MyLoginView, RegisterView
 
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
