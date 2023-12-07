@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import ToDoList
 from .forms import CreateNewList
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -35,6 +36,9 @@ def create(response):
             n = form.cleaned_data["name"]
             t = ToDoList(name=n)
             t.save()
+            if form.cleaned_data["check"] == True:
+                mail = response.user.username + "wants to approve list: " + t.name + ", id: " + str(t.id)
+                #send_mail("List Approval Request", mail, 'user@gmail.com' ,['sivan.obiacoro@gmail.com'])
             response.user.todolist.add(t)
 
         return HttpResponseRedirect("/%i" % t.id)
@@ -67,3 +71,19 @@ def menu(response):
 def lists(response):
     ls = ToDoList.objects.filter(approved=True)
     return render(response, "main/lists.html", {"ls": ls})
+
+def admin_approval(request):
+    word_lists = ToDoList.objects.all()
+    if request.user.is_superuser:
+        if request.method == "POST":
+            id_list = request.POST.getlist('boxes')
+            word_lists.update(approved=False)
+            print(id_list)
+            for item_id in id_list:
+                    ToDoList.objects.filter(id=int(item_id)).update(approved=True)
+            return redirect("lists")
+        else:
+            return render(request, 'main/admin_approval.html', {"word_lists":word_lists})
+    else:
+        return redirect("/")
+    return render(request, 'main/admin_approval.html')
