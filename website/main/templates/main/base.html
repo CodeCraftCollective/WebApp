@@ -78,7 +78,10 @@
                 <a href="/menu">Cards</a>
                 <a href="/create">Create</a>
                 <a href="/hangman">Hangman</a>
-                <a href="/logout">Logout</a>
+                <form id="logoutForm" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <a href="#" onclick="document.getElementById('logoutForm').submit()">Logout</a>
+                </form>
             {% else %}
                 <a href="/login">Login</a>
                 <a href="/registration">Sign Up</a>
