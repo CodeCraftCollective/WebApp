@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman Game</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'hangman/style.css' %}">
+</head>
+<body>
+    <h1>Hangman Game</h1>
+
+    <div class="image-text-container">
+        <img id="hangmanImage" src="{% static 'hangman/6.png' %}" alt="Hangman Image" class="background-image">
+    </div>
+    <div id="wordDisplay"></div>
+    <div id="letters">
+        <div id="letterRow1"></div> <!-- First row for letters -->
+        <div id="letterRow2"></div> <!-- Second row for letters -->
+        <div id="numberRow"></div>  <!-- Row for numbers -->
+    </div>
+    <button id="resetButton">Reset Game</button>
+
+    
+    <script src="{%static 'hangman/script.js' %}"></script>
+</body>
+</html>
+{% endblock %}
