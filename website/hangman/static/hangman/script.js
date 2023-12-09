@@ -1,6 +1,6 @@
 let incorrectGuesses = 0;
 const maxGuesses = 6;
-const words = ["Good morning", "Hello world", "Programming", "Javascript", "Django", "Hangman"]; // List of words
+const words = hangmanWords; // List of words
 let currentWord = '';
 
 document.addEventListener("DOMContentLoaded", () => {

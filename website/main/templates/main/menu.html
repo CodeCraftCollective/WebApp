@@ -12,24 +12,31 @@
   }
 
   .container {
-        background-color: white;
-        border-radius: 10px;
-        margin-top: 20px;
-        padding: 10px;
-        }
+    display: flex;
+    justify-content: center;
+  }
+
+  .card {
+    background: white;
+    width:200px;
+    height: 100px;
+    margin: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+
 </style>
 
+<section class="container">
 {% csrf_token %}
 {% for list in ls %}
-<div class="container">
-  <div>
-      <a href="/view/{{list.id}}">{{list.name}}</a>
-        <form action = "/{{list.id}}">
-          <button type = "submit">Edit</button>
-        </form>
-        <!--<a>-</a>-->
-  </div>
+<div>
+    <a href="/view/{{list.id}}" target="_blank" class="card">{{list.name}}</a>
+    <form action = "/{{list.id}}">
+      <button type = "submit">Edit</button>
+  </form>
 </div>
 {% endfor %}
+</section>
 
 {% endblock %}

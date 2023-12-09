@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     path('', include("main.urls")),
-
-    path("hangman/", views.hangman, name="hangman"),
+    path('hangman_menu/', views.menu, name='hangman_menu'),
+    path("hangman/<int:id>/", views.hangman, name="hangman"),
 ]
