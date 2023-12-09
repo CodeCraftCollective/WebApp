@@ -22,9 +22,11 @@
         <div id="numberRow"></div>  <!-- Row for numbers -->
     </div>
     <button id="resetButton">Reset Game</button>
+    <script type="text/javascript">
+        const hangmanWords = {{ words|safe }};
+    </script>
 
-    
-    <script src="{%static 'hangman/script.js' %}"></script>
+    <script src="{% static 'hangman/script.js' %}"></script>
 </body>
 </html>
 {% endblock %}
